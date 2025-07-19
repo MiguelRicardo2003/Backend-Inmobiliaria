@@ -9,6 +9,8 @@ import PagosArriendo from "./PagoArriendo.js";
 import Servicio from "./Servicio.js";
 import SolicitudServicio from "./SolicitudServicio.js";
 import ImagenPropiedad from "./ImagenPropiedad.js";
+import AtencionServicio from "./AtencionServicio.js";
+import VentaPropiedad from "./VentaPropiedad.js";
 
 // Definir las relaciones de las tablas
 TipoRol.hasMany(Usuario, { foreignKey: "rol_id", as: "usuarios" });
@@ -93,6 +95,47 @@ SolicitudServicio.belongsTo(Usuario, {
   as: "usuario",
 });
 
+//Atencion servicio y sus relaciones
+SolicitudServicio.hasOne(AtencionServicio, {
+  foreignKey: 'solicitud_id',
+  as: 'atencion',
+  onDelete: 'CASCADE'
+});
+AtencionServicio.belongsTo(SolicitudServicio, {
+  foreignKey: 'solicitud_id',
+  as: 'solicitud'
+});
+
+Usuario.hasMany(AtencionServicio, {
+  foreignKey: 'atendido_por',
+  as: 'atenciones'
+});
+AtencionServicio.belongsTo(Usuario, {
+  foreignKey: 'atendido_por',
+  as: 'atendido'
+});
+
+//Venta propiedades y sus relaciones
+Propiedad.hasOne(VentaPropiedad, {
+  foreignKey: 'propiedad_id',
+  as: 'venta',
+  onDelete: 'CASCADE',
+});
+VentaPropiedad.belongsTo(Propiedad, {
+  foreignKey: 'propiedad_id',
+  as: 'propiedad',
+});
+
+Usuario.hasMany(VentaPropiedad, {
+  foreignKey: 'comprador_id',
+  as: 'ventasRealizadas',
+});
+VentaPropiedad.belongsTo(Usuario, {
+  foreignKey: 'comprador_id',
+  as: 'comprador',
+});
+
+
 // Exportar modelos
 export {
   TipoRol,
@@ -104,5 +147,7 @@ export {
   Contrato,
   PagosArriendo,
   Servicio,
-  SolicitudServicio
+  SolicitudServicio,
+  AtencionServicio,
+  VentaPropiedad
 };
