@@ -5,7 +5,7 @@ const Arriendo = sequelize.define("Arriendo", {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
-    defaultValue: DataTypes.UUIDV4, // genera UUID automáticamente
+    defaultValue: DataTypes.UUIDV4, 
   },
   propiedad_id: {
     type: DataTypes.UUID,
