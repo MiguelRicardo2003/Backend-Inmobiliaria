@@ -1,6 +1,6 @@
-import { sequelize, Sequelize } from "../config/database.js";
+import { sequelize } from "../config/database.js";
 import { DataTypes } from "sequelize";
-import TipoUsuario from "./Usuario.js";
+
 
 const TipoRol = sequelize.define('TipoRol', {
   id: {
@@ -17,7 +17,5 @@ const TipoRol = sequelize.define('TipoRol', {
    tableName: 'roles',
    timestamps: false 
 })
-
-TipoRol.hasMany(TipoUsuario, { foreignKey: 'rol_id', as: 'usuarios' });
 
 export default TipoRol;

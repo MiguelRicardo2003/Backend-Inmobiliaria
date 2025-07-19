@@ -1,19 +1,17 @@
 // routes/tipoPropiedad.js
 
 import express from 'express';
-import TipoPropiedad from '../models/TipoPropiedad.js';
+import * as tipoPropiedadController from '../controllers/TipoPropiedad.controller.js';
+import { createTipoPropiedadValidator, updateTipoPropiedadValidator } from '../validators/TipoPropiedad.validator.js';
+import auth from '../middlewares/auth.middleware.js';
+import role from '../middlewares/Role.middleware.js';
 
 const router = express.Router();
 
-// GET /api/tipo-propiedades
-router.get('/', async (req, res) => {
-  try {
-    const tipos = await TipoPropiedad.findAll();
-    res.json(tipos);
-  } catch (error) {
-    console.error('Error al obtener tipos de propiedad:', error);
-    res.status(500).json({ error: 'Error al obtener los datos' });
-  }
-});
+router.get('/', tipoPropiedadController.findAll);
+router.get('/:id', tipoPropiedadController.findById);
+router.post('/', auth, role(['Administrador']), createTipoPropiedadValidator, tipoPropiedadController.create);
+router.put('/:id', auth, role(['Administrador']), updateTipoPropiedadValidator, tipoPropiedadController.update);
+router.delete('/:id', auth, role(['Administrador']), tipoPropiedadController.remove);
 
 export default router;
