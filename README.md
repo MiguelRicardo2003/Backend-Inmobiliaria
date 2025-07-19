@@ -98,10 +98,4 @@ Backend-Inmobiliaria/
 
 ---
 
-## Autor y Contacto
-- Desarrollado por: [Tu Nombre]
-- Contacto: [tu.email@ejemplo.com]
-
----
-
 ¡Listo para escalar y conectar con tu frontend JustHome! 🚀 
