@@ -55,6 +55,18 @@ const Propiedad = sequelize.define('Propiedad', {
       key: 'id',
     },
   },
+  list_id: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: 'lists',
+      key: 'id',
+    },
+  },
+  orden: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
   fecha_publicacion: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,

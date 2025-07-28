@@ -11,6 +11,8 @@ import SolicitudServicio from "./SolicitudServicio.js";
 import ImagenPropiedad from "./ImagenPropiedad.js";
 import AtencionServicio from "./AtencionServicio.js";
 import VentaPropiedad from "./VentaPropiedad.js";
+import Project from "./Project.js";
+import List from "./List.js";
 
 // Definir las relaciones de las tablas
 TipoRol.hasMany(Usuario, { foreignKey: "rol_id", as: "usuarios" });
@@ -135,6 +137,35 @@ VentaPropiedad.belongsTo(Usuario, {
   as: 'comprador',
 });
 
+// Relaciones para Project, List y Property (Trello-like)
+Project.hasMany(List, {
+  foreignKey: 'project_id',
+  as: 'lists',
+  onDelete: 'CASCADE',
+});
+List.belongsTo(Project, {
+  foreignKey: 'project_id',
+  as: 'project',
+});
+
+List.hasMany(Propiedad, {
+  foreignKey: 'list_id',
+  as: 'properties',
+  onDelete: 'SET NULL',
+});
+Propiedad.belongsTo(List, {
+  foreignKey: 'list_id',
+  as: 'list',
+});
+
+Usuario.hasMany(Project, {
+  foreignKey: 'responsable_id',
+  as: 'projects',
+});
+Project.belongsTo(Usuario, {
+  foreignKey: 'responsable_id',
+  as: 'responsable',
+});
 
 // Exportar modelos
 export {
@@ -149,5 +180,7 @@ export {
   Servicio,
   SolicitudServicio,
   AtencionServicio,
-  VentaPropiedad
+  VentaPropiedad,
+  Project,
+  List
 };

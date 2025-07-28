@@ -15,6 +15,8 @@ import solicitudServicioRoutes from './SolicitudServicio.routes.js';
 import atencionServicioRoutes from './AtencionServicio.routes.js';
 import ventaPropiedadRoutes from './VentaPropiedad.routes.js';
 import authRoutes from './Auth.routes.js';
+import projectRoutes from './Project.routes.js';
+import listRoutes from './List.routes.js';
 
 dotenv.config();
 
@@ -35,6 +37,8 @@ routes.use('/solicitudes', solicitudServicioRoutes);
 routes.use('/atenciones', atencionServicioRoutes);
 routes.use('/ventas', ventaPropiedadRoutes);
 routes.use('/auth', authRoutes);
+routes.use('/projects', projectRoutes);
+routes.use('/lists', listRoutes);
 
 //route info para ver facil lo que hay en cada ruta
 const API_PREFIX = process.env.API_PREFIX || '';
@@ -46,7 +50,8 @@ routes.get('/info', (req, res) => {
       { entity: 'usuarios', routes: [`${prefix}/usuarios`] },
       { entity: 'tipo_propiedades', routes: [`${prefix}/tipo_propiedades`] },
       { entity: 'estado_propiedades', routes: [`${prefix}/estado_propiedades`] },
-      { entity: 'propiedades', routes: [`${prefix}/propiedades`] },
+      { entity: 'propiedades', routes: [`${prefix}/propiedades`], desc: "CRUD básico de propiedades" },
+      { entity: 'propiedades_trello', routes: [`${prefix}/propiedades/trello/*`], desc: "Funcionalidad Trello para propiedades" },
       { entity: 'imagenes', routes: [`${prefix}/imagenes`], res: "Las imganes van con las propiedades" },
       { entity: 'arriendos', routes: [`${prefix}/arriendos`] },
       { entity: 'pagos', routes: [`${prefix}/pagos`] },
@@ -55,6 +60,8 @@ routes.get('/info', (req, res) => {
       { entity: 'solicitudes', routes: [`${prefix}/solicitudes`] },
       { entity: 'atenciones', routes: [`${prefix}/atenciones`] },
       { entity: 'ventas', routes: [`${prefix}/ventas`] },
+      { entity: 'projects', routes: [`${prefix}/projects`], desc: "Proyectos/Sedes para organización Trello" },
+      { entity: 'lists', routes: [`${prefix}/lists`], desc: "Listas dentro de proyectos" },
       // { entity: 'auth', routes: [`${prefix}/auth/login`, `${prefix}/auth/register`] },
     ]
   });
