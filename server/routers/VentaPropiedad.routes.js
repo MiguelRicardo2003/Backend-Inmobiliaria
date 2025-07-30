@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as ventaPropiedadController from '../controllers/VentaPropiedad.controller.js';
 import { createVentaPropiedadValidator, updateVentaPropiedadValidator } from '../validators/VentaPropiedad.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 
 const router = Router();
 

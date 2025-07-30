@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as contratoController from '../controllers/Contrato.controller.js';
 import { createContratoValidator, updateContratoValidator } from '../validators/Contrato.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 
 const router = Router();
 

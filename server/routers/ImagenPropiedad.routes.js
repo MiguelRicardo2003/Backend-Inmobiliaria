@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as imagenPropiedadController from '../controllers/ImagenPropiedad.controller.js';
 import { createImagenPropiedadValidator } from '../validators/ImagenPropiedad.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 
 const router = Router();
 

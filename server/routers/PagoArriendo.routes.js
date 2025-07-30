@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as pagoArriendoController from '../controllers/PagoArriendo.controller.js';
 import { createPagoArriendoValidator, updatePagoArriendoValidator } from '../validators/PagoArriendo.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 
 const router = Router();
 

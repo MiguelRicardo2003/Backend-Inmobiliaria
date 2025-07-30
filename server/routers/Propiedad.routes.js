@@ -11,7 +11,7 @@ import {
   getPropertiesByProject
 } from '../controllers/Property.controller.js';
 import { createPropiedadValidator, updatePropiedadValidator } from '../validators/Propiedad.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 
 const router = Router();
 

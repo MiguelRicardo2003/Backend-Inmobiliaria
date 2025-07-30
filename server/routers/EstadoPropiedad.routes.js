@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as estadoPropiedadController from '../controllers/EstadoPropiedad.controller.js';
 import { createEstadoPropiedadValidator, updateEstadoPropiedadValidator } from '../validators/EstadoPropiedad.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 import role from '../middlewares/Role.middleware.js';
 
 const router = Router();

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as arriendoController from '../controllers/Arriendo.controller.js';
 import { createArriendoValidator, updateArriendoValidator } from '../validators/Arriendo.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 
 const router = Router();
 

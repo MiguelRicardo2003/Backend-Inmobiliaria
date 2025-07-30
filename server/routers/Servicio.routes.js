@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as servicioController from '../controllers/Servicio.controller.js';
 import { createServicioValidator, updateServicioValidator } from '../validators/Servicio.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 
 const router = Router();
 

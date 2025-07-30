@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as usuariosController from '../controllers/Usuarios.controller.js';
 import { createUsuarioValidator, updateUsuarioValidator } from '../validators/Usuarios.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 import role from '../middlewares/Role.middleware.js';
 
 const router = Router();

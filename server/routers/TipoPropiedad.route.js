@@ -3,7 +3,7 @@
 import express from 'express';
 import * as tipoPropiedadController from '../controllers/TipoPropiedad.controller.js';
 import { createTipoPropiedadValidator, updateTipoPropiedadValidator } from '../validators/TipoPropiedad.validator.js';
-import auth from '../middlewares/auth.middleware.js';
+import auth from '../middlewares/Auth.middleware.js';
 import role from '../middlewares/Role.middleware.js';
 
 const router = express.Router();
