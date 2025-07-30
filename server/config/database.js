@@ -35,8 +35,17 @@ const testConnection = async () => {
     console.log("🔐 Conexión segura con PostgreSQL establecida correctamente.");
   } catch (error) {
     console.error("❌ No se pudo conectar a la base de datos:", error);
-    process.exit(1);
+    
+    // En producción, no salir del proceso para evitar que falle el despliegue
+    if (isProduction) {
+      console.log("⚠️ Continuando sin conexión a base de datos en producción...");
+      return false;
+    } else {
+      // Solo salir en desarrollo
+      process.exit(1);
+    }
   }
+  return true;
 };
 
 export { sequelize, testConnection };
