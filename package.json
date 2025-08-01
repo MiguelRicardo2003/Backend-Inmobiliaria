@@ -7,7 +7,6 @@
     "dev": "node --watch app.js",
     "start": "node app.js",
     "build": "echo 'Build completed successfully'",
-    "vercel-build": "npm install && echo 'Vercel build completed'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
