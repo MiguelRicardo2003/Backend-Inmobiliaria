@@ -1,24 +1,23 @@
 // imports
 import express from 'express';
-import dotenv from 'dotenv'; 
+import dotenv from 'dotenv';
 import { testConnection } from './server/config/database.js';
 import routes from './server/routers/index.js';
 import errorHandler from './server/middlewares/ErrorHandler.middleware.js';
 import morgan from 'morgan';
-import serverless from 'serverless-http';
 import cors from 'cors';
 
-//const
-const app = express() 
+const app = express();
 
-//config
-dotenv.config()
+// config
+dotenv.config();
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://justhome-frontend.vercel.app/','https://backend-inmobiliaria.vercel.app/'] // Cambiar por tu dominio de frontend
-    : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
+  origin:
+    process.env.NODE_ENV === 'production'
+      ? ['https://justhome-frontend.vercel.app/', 'https://backend-inmobiliaria.vercel.app/']
+      : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -31,7 +30,7 @@ app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 // routes
 app.use(`${process.env.API_PREFIX}`, routes);
 
-//route raiz
+// route raíz
 app.get('/', (req, res) => {
   res.json({
     status: 'ok',
@@ -58,10 +57,8 @@ testConnection();
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+    console.log(`Servidor corriendo en puerto ${PORT}`);
   });
 }
 
-// Para Vercel serverless
 export default app;
-export const handler = serverless(app);

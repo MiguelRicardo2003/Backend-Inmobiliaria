@@ -7,6 +7,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const sequelize = new Sequelize({
   dialect: "postgres",
+  dialectModule: require("pg"),
   host: process.env.PG_HOST,
   port: Number(process.env.PG_PORT) || 5432,
   database: process.env.PG_DATABASE,

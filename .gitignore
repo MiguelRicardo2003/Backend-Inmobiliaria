@@ -43,3 +43,8 @@ coverage/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Package manager files
+.npmrc
+pnpm-lock.yaml
+yarn.lock
