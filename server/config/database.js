@@ -22,7 +22,7 @@ const sequelize = new Sequelize({
     ? {
         ssl: {
           require: true,
-          rejectUnauthorized: false,
+          rejectUnauthorized: false, 
         },
       }
     : {},
@@ -32,9 +32,10 @@ const sequelize = new Sequelize({
 const testConnection = async () => {
   try {
     await sequelize.authenticate();
-    console.log("🔐 Conexión segura con PostgreSQL establecida correctamente.");
+    console.log("🔐 Conexión con Supabase establecida correctamente.");
+    process.exit(0);
   } catch (error) {
-    console.error("❌ No se pudo conectar a la base de datos:", error);
+    console.error("❌ No se pudo conectar a la base de datos:", error.message);
     process.exit(1);
   }
 };
