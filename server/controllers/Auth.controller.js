@@ -2,6 +2,7 @@ import Usuario from '../models/Usuario.js';
 import TipoRol from '../models/TipoRol.js';
 import { validationResult } from 'express-validator';
 import { hashPassword, comparePassword } from '../utils/usuarioUtils.js';
+import jwt from 'jsonwebtoken';
 
 export const register = async (req, res) => {
   const errors = validationResult(req);
@@ -30,16 +31,23 @@ export const login = async (req, res) => {
     if (!usuario) return res.status(401).json({ message: 'Credenciales inválidas' });
     const match = await comparePassword(contrasenia, usuario.contrasenia);
     if (!match) return res.status(401).json({ message: 'Credenciales inválidas' });
-    // Aquí deberías generar y devolver un JWT, pero para ejemplo solo devuelvo datos básicos
+    
+    // Generar JWT
+    const payload = {
+      id: usuario.id,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      correo: usuario.correo,
+      rol: usuario.rol ? usuario.rol.nombre : undefined
+    };
+    const secret = process.env.JWT_SECRET || 'dev_secret_change_me';
+    const expiresIn = process.env.JWT_EXPIRES_IN || '8h';
+    const token = jwt.sign(payload, secret, { expiresIn });
+    
     res.status(200).json({
       message: 'Login exitoso',
-      usuario: {
-        id: usuario.id,
-        nombre: usuario.nombre,
-        apellido: usuario.apellido,
-        correo: usuario.correo,
-        rol: usuario.rol ? usuario.rol.nombre : undefined
-      }
+      accessToken: token,
+      usuario: payload
     });
   } catch (error) {
     res.status(500).json({ message: 'Error al iniciar sesión', error });
