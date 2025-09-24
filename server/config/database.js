@@ -35,9 +35,23 @@ const testConnection = async () => {
     console.log("🔐 Conexión con Supabase establecida correctamente.");
     process.exit(0);
   } catch (error) {
+<<<<<<< HEAD
     console.error("❌ No se pudo conectar a la base de datos:", error.message);
     process.exit(1);
+=======
+    console.error("❌ No se pudo conectar a la base de datos:", error);
+    
+    // En producción, no salir del proceso para evitar que falle el despliegue
+    if (isProduction) {
+      console.log("⚠️ Continuando sin conexión a base de datos en producción...");
+      return false;
+    } else {
+      // Solo salir en desarrollo
+      process.exit(1);
+    }
+>>>>>>> cc116e0733f66232f1c7a57af89492e92d840fa6
   }
+  return true;
 };
 
 export { sequelize, testConnection };

@@ -16,6 +16,7 @@ Backend-Inmobiliaria/
     middlewares/    # Autenticación, roles, error handler, logger
     utils/          # Lógica auxiliar y permisos
   app.js            # Configuración principal Express
+  vercel.json       # Configuración para despliegue en Vercel
   README.md         # (Este archivo)
 ```
 
@@ -72,28 +73,64 @@ Backend-Inmobiliaria/
 ---
 
 ## Ejecución y Uso
+
+### Desarrollo Local
 1. Instala dependencias:
    ```bash
    npm install
    ```
-2. Configura variables de entorno (`.env`):
+2. Configura variables de entorno:
+   ```bash
+   cp env.example .env
+   # Edita .env con tus valores locales
+   ```
+3. Variables de entorno requeridas:
    - `API_PREFIX=/api` (o el prefijo que desees)
    - `PORT=3000`
-   - `PORT_LOCAL=3000`
-   - (y las de tu base de datos)
-3. Ejecuta el backend:
+   - `NODE_ENV=development`
+   - Configuración de PostgreSQL (PG_HOST, PG_PORT, PG_DATABASE, PG_USERNAME, PG_PASSWORD)
+4. Ejecuta el backend:
    ```bash
-   node app.js
+   npm run dev
    ```
-4. Accede a:
+5. Accede a:
    - `http://localhost:3000/` → Estado del backend
    - `http://localhost:3000/api/info` → Endpoints disponibles
+
+### Despliegue en Vercel
+
+1. **Preparación:**
+   - El proyecto ya está configurado para Vercel con `vercel.json`
+   - Usa `serverless-http` para funcionamiento serverless
+
+2. **Configuración de variables de entorno en Vercel:**
+   - Ve al dashboard de Vercel
+   - En tu proyecto, ve a Settings > Environment Variables
+   - Agrega las siguientes variables:
+     ```
+     API_PREFIX=/api
+     NODE_ENV=production
+     PG_HOST=tu_host_produccion
+     PG_PORT=5432
+     PG_DATABASE=tu_database_produccion
+     PG_USERNAME=tu_usuario_produccion
+     PG_PASSWORD=tu_password_produccion
+     ```
+
+3. **Despliegue:**
+   ```bash
+   vercel --prod
+   ```
+
+4. **Verificación:**
+   - Tu API estará disponible en: `https://tu-proyecto.vercel.app/`
+   - Endpoints en: `https://tu-proyecto.vercel.app/api/info`
 
 ---
 
 ## Notas y Futuro
 - El middleware de autenticación está listo para JWT (solo descomenta y configura cuando lo requieras).
-- El backend está preparado para producción, solo agrega CORS, HTTPS y JWT según tus necesidades.
+- El backend está preparado para producción con configuración serverless.
 - Puedes extender los permisos y lógica de negocio fácilmente en `/utils` y controladores.
 
 ---
