@@ -22,7 +22,7 @@ const sequelize = new Sequelize({
     ? {
         ssl: {
           require: true,
-          rejectUnauthorized: false, 
+          rejectUnauthorized: false,
         },
       }
     : {},
@@ -33,14 +33,17 @@ const testConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log("🔐 Conexión con Supabase establecida correctamente.");
-    process.exit(0);
+    return true;
   } catch (error) {
-
     console.error("❌ No se pudo conectar a la base de datos:", error.message);
-    process.exit(1);
 
+    if (isProduction) {
+      console.log("⚠️ Continuando sin conexión en producción...");
+      return false;
+    } else {
+      process.exit(1);
+    }
   }
-  return true;
 };
 
 export { sequelize, testConnection };
